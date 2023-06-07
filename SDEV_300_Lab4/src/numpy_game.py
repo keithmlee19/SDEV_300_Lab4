@@ -127,9 +127,8 @@ def validate_phone_zip():
                 if zip_formatted:
 					# go to handling matrices once phone/zip are validated
                     handle_matrix_input()
-                    # break loop once operation is ocmplete
+                    # break loop once operation is complete
                     break
-                # prompts for zip code reentry
                 print("Your zip code is not in the correct format. Please try again\n")
             # prompts for starting over from phone number reentry
             else:
