@@ -8,11 +8,11 @@ import numpy as np
 def print_matrix(matrix):
     '''Prints 3x3 matrix without brackets'''
     # converts to dataframe
-    df = pd.DataFrame(matrix)
+    dfr = pd.DataFrame(matrix)
     # round to 2 decimal places
-    df = df.round(2)
+    dfr = dfr.round(2)
     # uses built-in dataframe functionality
-    print(df.to_string(header=False, index=False))
+    print(dfr.to_string(header=False, index=False))
 
 def matrix_transpose_mean(matrix):
     '''Performs tranpose and mean operations and prints results'''
@@ -83,7 +83,7 @@ def handle_matrix_input():
             user_matrix_1 = []
 
             # for loop for appending rows
-            for i in range(3):
+            for _ in range(3):
                 row = list(map(int, input().split()))
                 user_matrix_1.append(row)
             matrix1 = np.asmatrix(user_matrix_1)
@@ -97,7 +97,7 @@ def handle_matrix_input():
             user_matrix_2 = []
 
             # for loop for appending rows
-            for i in range(3):
+            for _ in range(3):
                 row = list(map(int, input().split()))
                 user_matrix_2.append(row)
             matrix2 = np.asmatrix(user_matrix_2)
