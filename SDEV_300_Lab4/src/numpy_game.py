@@ -4,7 +4,7 @@ import re
 import sys
 import pandas as pd
 import numpy as np
-            
+
 def print_matrix(matrix):
     '''Prints 3x3 matrix without brackets'''
     # converts to dataframe
