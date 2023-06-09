@@ -4,35 +4,37 @@ import re
 import sys
 import pandas as pd
 import numpy as np
-
+                
 def print_matrix(matrix):
     '''Prints 3x3 matrix without brackets'''
     # converts to dataframe
     dfr = pd.DataFrame(matrix)
-    # round to 2 decimal places
+    # rounds to 2 decimal places
     dfr = dfr.round(2)
-    # uses built-in dataframe functionality
+    # uses built-in dataframe functionality to print nicely
     print(dfr.to_string(header=False, index=False))
 
 def matrix_transpose_mean(matrix):
     '''Performs tranpose and mean operations and prints results'''
+    matrix = np.array(matrix)
     trp = np.transpose(matrix)
     print("The transpose is:")
     print_matrix(trp)
-    # gets means of columns, rounds to 2 places, and flattens into 1D matrix
+    # gets means of columns and rounds to 2 places
     col_means = np.mean(matrix, axis=0)
-    col_means = np.round(col_means, 2).flatten()
-    # gets means of rows, rounds to 2 places, and flattens into 1D matrix
+    col_means = np.round(col_means,2)
+    # gets means of rows and rounds to 2 places
     row_means = np.mean(matrix, axis=1)
-    row_means = np.round(row_means, 2).flatten()
-    # prints results
+    row_means = np.round(row_means,2)
     print("The row and column mean values of the results are:")
     # prints row results on one line with comma separator
     print("Row:", end = " ")
-    print(*row_means, sep = ", ")
+    str_row = ", ".join(f"{num:g}" for num in row_means)
+    print(str_row)
     # prints column results on one line with comma separator
     print("Column:", end = " ")
-    print(*col_means, sep = ", ")
+    str_col = ", ".join(f"{num:g}" for num in col_means)
+    print(str_col)
     print() # just a blank line for readability
 
 def matrix_menu(matrix1, matrix2):
@@ -84,7 +86,7 @@ def handle_matrix_input():
 
             # for loop for appending rows
             for _ in range(3):
-                row = list(map(int, input().split()))
+                row = list(float(num) if "." in num else int(num) for num in input().split())
                 user_matrix_1.append(row)
             matrix1 = np.asmatrix(user_matrix_1)
 
@@ -98,7 +100,7 @@ def handle_matrix_input():
 
             # for loop for appending rows
             for _ in range(3):
-                row = list(map(int, input().split()))
+                row = list(float(num) if "." in num else int(num) for num in input().split())
                 user_matrix_2.append(row)
             matrix2 = np.asmatrix(user_matrix_2)
 
@@ -125,7 +127,7 @@ def validate_phone_zip():
                 zip_plus4 = input("Enter your zip code +4 (XXXXX-XXXX):\n")
                 zip_formatted = bool(re.match(r"^\d{5}-\d{4}$", zip_plus4))
                 if zip_formatted:
-					# go to handling matrices once phone/zip are validated
+                    # go to handling matrices once phone/zip are validated
                     handle_matrix_input()
                     # break loop once operation is complete
                     break
@@ -138,6 +140,13 @@ def validate_phone_zip():
 
 def main():
     '''Main function to handle initial user input'''
+    # matrix1 = np.array([[9.55,4.46,5.58], [5.83,3.17,8.91], [7.25,4.02,1.65]])
+    # matrix2 = np.array([[4.44,6.76,5.13], [1.70,6.73,1.50,], [7.75,1.90,9.79]])
+    # matrix3 = np.array([[4,5,1],[8,6,3],[9,6,2]])
+    # matrix4 = np.array([[2,4,2],[8,8,6],[1,9,4]])
+    # add_result = np.add(matrix3, matrix4)
+    # print_matrix(add_result)
+    # matrix_transpose_mean(add_result)
     while True:
         try:
             print("******* Welcome to the Python Matrix Application *******")
